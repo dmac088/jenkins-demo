@@ -14,7 +14,7 @@ pipelineJob('theme-park-job') {
                     remote {
                         url 'https://github.com/dmac088/ThemePark.git'
                     }
-                    branch 'master'
+                    branch 'main'
                 }
             }
         }

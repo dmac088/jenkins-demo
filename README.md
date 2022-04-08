@@ -14,3 +14,73 @@ branch ([YouTube video](https://youtu.be/sCcuUMn1vdM) | [article](https://tomgre
 `./gradlew docker dockerRun`
 
 Jenkins will then be available at [http://localhost:8080](http://localhost:8080).
+
+
+
+#build docker image
+docker build -t jenkins-demo .
+
+#run docker image
+docker run jenkins-demo
+
+
+#list docker images and get the id of jenkins-demo
+sudo docker ps -a
+
+
+#connect to the image as root and start the shell
+docker exec -it --user root d5e2877b9161 sh
+
+
+#modify permissions on sock file to enable docker in docker
+chmod 666 /var/run/docker.sockAna
+
+
+
+#Running from gradle 
+#go to the root directory of jenkins-demo
+./gradlew docker dockerRun
+
+
+#list the images of docker or use ps top get the list of currently running
+docker images
+docker ps
+
+
+#connect to the container as root
+docker exec -it --user root f60a333b56d1 sh
+
+
+#modify permissions on sock file to enable docker in docker
+chmod 666 /var/run/docker.sock
+
+
+#connect to the container as non-root and run the following which should work 
+docker ps
+
+
+###INSTALLATION FROM SCRATCH###
+
+#install new image without jdk
+docker run -p 8080:8080 -p 50000:50000 -d -v /var/run/docker.sock:/var/run/docker.sock -v jenkins_home:/var/jenkins_home jenkins/jenkins:lts
+
+
+#install new image with jdk
+docker run -p 8080:8080 -p 50000:50000 -d -v /var/run/docker.sock:/var/run/docker.sock -v jenkins_home:/var/jenkins_home jenkins/jenkins:lts-jdk11
+
+
+#docker images 
+sudo docker ps -a
+
+#connect to the container as root
+docker exec -it --user root <container id> sh
+
+#install docker
+curl https://get.docker.com/ > dockerinstall && chmod 777 dockerinstall && ./dockerinstall
+
+#modify permissions on sock file to enable docker in docker
+chmod 666 /var/run/docker.sock
+
+#test docker daemon
+docker ps
+

@@ -33,7 +33,7 @@ docker exec -it --user root d5e2877b9161 sh
 
 
 #modify permissions on sock file to enable docker in docker
-chmod 666 /var/run/docker.sockAna
+chmod 666 /var/run/docker.sock
 
 
 
